@@ -1,8 +1,10 @@
 import {
 	ADD_REVIEW,
 	GET_CURRENTUSER,
-	LOGOUT_CURRENTUSER
+	LOGOUT_CURRENTUSER,
+	GET_RESTAURANTS
 } from '../constants';
+import { defaultFecthGet } from './defaultFetch';
 
 //Review
 export const addReview = (review) => ({
@@ -38,4 +40,16 @@ export const checkLogin = ({ email, password }) => (dispatch, getState) => {
 	}
 	console.log("wrong username or password...");
 	return false;
+}
+
+//restaurant
+export const getRestaurants = (restaurants) => {
+  return {
+    type: GET_RESTAURANTS,
+    content: restaurants
+  }
+}
+
+export const getRestaurantList = () => {
+  return defaultFecthGet(getRestaurants,"http://localhost:8080/restaurants", "GET") ;
 }

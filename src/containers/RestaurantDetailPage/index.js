@@ -6,6 +6,7 @@ import GoogleMapReact from 'google-map-react';
 import { Rating } from 'material-ui-rating';
 import { calcAverageRating } from '../../utils';
 import { Link } from 'react-router-dom';
+import Map from '../../components/GoogleMaps';
 
 const styles = {
 	marker: {
@@ -37,10 +38,7 @@ class RestaurantDetailPage extends Component {
 		const {restaurant} = this.props;
 		const {reviews} = this.props;
 		const reviewsSize = Object.keys(reviews).length;
-		const center = {
-			lat: restaurant.lat,
-			lng: restaurant.lon,
-		};
+		const srcText = `http://maps.google.com/maps/api/staticmap?center=${restaurant.address}&maptype=roadmap&zoom=14&size=500x350&sensor=false&maptype=HYBRID&markers=color:red|label:${restaurant.address}|${restaurant.address}`
 
 		return(
 			<div className="restaurantDetailPage">
@@ -53,7 +51,7 @@ class RestaurantDetailPage extends Component {
 						readOnly={true}
 	        />
 					<p>{reviewsSize} reviews</p>
-					<p>{restaurant.address}, {restaurant.plz} {restaurant.city}</p>
+					<p>{restaurant.address}</p>
 					<p>{restaurant.phone}</p>
 					<p><Link to={'http://' + restaurant.website}>{restaurant.website}</Link></p>
 
@@ -68,17 +66,8 @@ class RestaurantDetailPage extends Component {
 
 					<br />
 					<br />
-					<GoogleMapReact
-						defaultZoom={14}
-						defaultCenter={center}
-					>
-						<Marker
-		          lat={restaurant.lat}
-		          lng={restaurant.lon}
-		          text={restaurant.name}
-		        />
-					</GoogleMapReact>
-
+					<Map address={restaurant.address}
+							 name={restaurant.name}/>
 				</div>
 				<div className="reviews" style={styles.content}>
 					<Reviews restaurant={restaurant} />

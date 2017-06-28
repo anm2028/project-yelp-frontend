@@ -4,6 +4,7 @@ export const API = 'api';
 
 export const GET_CURRENTUSER = 'GET_CURRENTUSER';
 export const LOGOUT_CURRENTUSER = 'LOGOUT_CURRENTUSER';
+export const GET_RESTAURANTS = 'GET_RESTAURANTS';
 
 // export const urlBase = 'https://yelp.herokuapp.com';
 
